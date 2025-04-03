@@ -9,7 +9,9 @@ const createMovie = async (req, res) => {
       message: "Movie created successfully",
       data: newMovie,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 module.exports = { createMovie };

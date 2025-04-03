@@ -10,7 +10,9 @@ const sequelize = new Sequelize(nameBd, userBd, passwordBd, {
   host: host,
   port: portBd,
   dialect: "postgres",
-});
+  logging: false
+}
+);
 
 const authenthicate = async () => {
   try {

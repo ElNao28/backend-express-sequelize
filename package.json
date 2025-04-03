@@ -5,11 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "nodemon src/index.js",
+    "db:migrate": "node node_modules/db-migrate/bin/db-migrate up",
+    "db:migrate:create": "node node_modules/db-migrate/bin/db-migrate create",
+    "db:migrate:down": "node node_modules/db-migrate/bin/db-migrate down"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "db-migrate": "^0.11.14",
+    "db-migrate-pg": "^1.5.2",
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "nodemon": "^3.1.9",

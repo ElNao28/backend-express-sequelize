@@ -1,0 +1,11 @@
+{
+  "defaultEnv": "local",
+  "local": {
+    "driver": "pg",
+    "user": { "ENV": "USERNAME_BD" },
+    "password": { "ENV": "PASSWORD_BD" },
+    "host": { "ENV": "HOST" },
+    "database": { "ENV": "NAME_BD" },
+    "port": { "ENV": "PORT_BD" }
+  }
+}
