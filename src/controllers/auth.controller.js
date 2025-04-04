@@ -1,6 +1,8 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const trasporter = require("../helpers/transporter.helper");
 const User = require("../models/user.model");
+
 const loginUser = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -21,4 +23,25 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { loginUser };
+const recoverPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const userFound = await User.findOne({
+      where: { email },
+    });
+    if (!userFound) return res.status(404).json({ message: "User not found" });
+
+    const token = jwt.sign({ userFound }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    await trasporter.sendMail({
+      from: process.env.EMAIL_SENDER,
+      to: email,
+      subject: "Recuperar contraseña",
+      text: `Hola! Para recuperar tu contraseña, haz click en el siguiente enlace: ${process.env.APP_URL}recover-password/${token}`,
+    });
+    res.status(200).json({ message: "Email send" });
+  } catch (error) {}
+};
+
+module.exports = { loginUser, recoverPassword };
