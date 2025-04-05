@@ -8,16 +8,16 @@ const loginUser = async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ where: { username } });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "El Usuario no existe" });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.status(401).json({ message: "Contraseña incorrecta" });
     }
     const token = jwt.sign({ user }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    res.status(200).json({ message: "Logged in successfully", token });
+    res.status(200).json({ message: "Bienvenido", token });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -29,7 +29,7 @@ const recoverPassword = async (req, res) => {
     const userFound = await User.findOne({
       where: { email },
     });
-    if (!userFound) return res.status(404).json({ message: "User not found" });
+    if (!userFound) return res.status(404).json({ message: "El correo no se encuentra registrado" });
 
     const token = jwt.sign({ userFound }, process.env.JWT_SECRET, {
       expiresIn: "1h",

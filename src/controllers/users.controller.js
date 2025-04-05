@@ -9,7 +9,7 @@ const createNewUser = async (req, res) => {
       if (user.email === email || user.username === username) {
         return res
           .status(400)
-          .json({ message: "Username or Email already exists" });
+          .json({ message: "El correo o usuario ya esta registrado" });
       }
     }
 
@@ -21,7 +21,7 @@ const createNewUser = async (req, res) => {
     });
     res
       .status(201)
-      .json({ message: "User created successfully", data: newUser });
+      .json({ message: "Registro compleado", data: newUser });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
