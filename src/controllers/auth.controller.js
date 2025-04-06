@@ -23,7 +23,7 @@ const loginUser = async (req, res) => {
   }
 };
 
-const recoverPassword = async (req, res) => {
+const sendEmailToRecoverPassword = async (req, res) => {
   const { email } = req.query;
   try {
     const userFound = await User.findOne({
@@ -34,7 +34,8 @@ const recoverPassword = async (req, res) => {
         .status(404)
         .json({ message: "El correo no se encuentra registrado" });
 
-    const token = jwt.sign({ userFound }, process.env.JWT_SECRET, {
+    const { password, ...userData } = userFound.dataValues;
+    const token = jwt.sign({ userData }, process.env.JWT_SECRET, {
       expiresIn: "10m",
     });
     await trasporter.sendMail({
@@ -43,8 +44,20 @@ const recoverPassword = async (req, res) => {
       subject: "Recuperar contraseña",
       text: `Hola! Para recuperar tu contraseña, haz click en el siguiente enlace: ${process.env.APP_URL}recover-password/${token}`,
     });
-    res.status(200).json({ message: "Se a enviado un correo con instrucciones" });
-  } catch (error) {}
+    res
+      .status(200)
+      .json({ message: "Se a enviado un correo con instrucciones" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-module.exports = { loginUser, recoverPassword };
+const verifyToken = (req, res) => {
+  const { token } = req.body;
+  jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    if (err) return res.status(403).json({ message: "Token invalido" });
+    res.status(200).json({ message: "Token valido" });
+  });
+};
+
+module.exports = { loginUser, sendEmailToRecoverPassword, verifyToken };
