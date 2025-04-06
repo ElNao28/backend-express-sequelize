@@ -42,7 +42,7 @@ const sendEmailToRecoverPassword = async (req, res) => {
       from: process.env.EMAIL_SENDER,
       to: email,
       subject: "Recuperar contraseña",
-      text: `Hola! Para recuperar tu contraseña, haz click en el siguiente enlace: ${process.env.APP_URL}recover-password/${token}`,
+      text: `Hola! Para recuperar tu contraseña, haz click en el siguiente enlace: ${process.env.APP_URL}public/restore-password/${token}`,
     });
     res
       .status(200)
