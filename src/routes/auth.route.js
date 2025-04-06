@@ -7,6 +7,6 @@ const {
 } = require("../controllers/auth.controller");
 
 router.post("/auth", loginUser);
-router.post("/recover-password", recoverPassword);
+router.get("/recover-password", recoverPassword);
 
 module.exports = router;

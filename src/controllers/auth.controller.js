@@ -24,15 +24,18 @@ const loginUser = async (req, res) => {
 };
 
 const recoverPassword = async (req, res) => {
-  const { email } = req.body;
+  const { email } = req.query;
   try {
     const userFound = await User.findOne({
       where: { email },
     });
-    if (!userFound) return res.status(404).json({ message: "El correo no se encuentra registrado" });
+    if (!userFound)
+      return res
+        .status(404)
+        .json({ message: "El correo no se encuentra registrado" });
 
     const token = jwt.sign({ userFound }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "10m",
     });
     await trasporter.sendMail({
       from: process.env.EMAIL_SENDER,
@@ -40,7 +43,7 @@ const recoverPassword = async (req, res) => {
       subject: "Recuperar contraseña",
       text: `Hola! Para recuperar tu contraseña, haz click en el siguiente enlace: ${process.env.APP_URL}recover-password/${token}`,
     });
-    res.status(200).json({ message: "Email send" });
+    res.status(200).json({ message: "Se a enviado un correo con instrucciones" });
   } catch (error) {}
 };
 
