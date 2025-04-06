@@ -54,6 +54,7 @@ const sendEmailToRecoverPassword = async (req, res) => {
 
 const verifyToken = (req, res) => {
   const { token } = req.body;
+  console.log(token);
   jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
     if (err) return res.status(403).json({ message: "Token invalido" });
     res.status(200).json({ message: "Token valido" });
