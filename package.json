@@ -8,7 +8,8 @@
     "start": "nodemon src/index.js",
     "db:migrate": "node node_modules/db-migrate/bin/db-migrate up",
     "db:migrate:create": "node node_modules/db-migrate/bin/db-migrate create",
-    "db:migrate:down": "node node_modules/db-migrate/bin/db-migrate down"
+    "db:migrate:down": "node node_modules/db-migrate/bin/db-migrate down",
+    "db:migrate:reset": "node node_modules/db-migrate/bin/db-migrate reset"
   },
   "author": "",
   "license": "ISC",

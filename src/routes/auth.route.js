@@ -3,10 +3,12 @@ const { Router } = require("express");
 const router = Router();
 const {
   loginUser,
-  recoverPassword,
+  sendEmailToRecoverPassword,
+  verifyToken
 } = require("../controllers/auth.controller");
 
 router.post("/auth", loginUser);
-router.post("/recover-password", recoverPassword);
+router.get("/send-email", sendEmailToRecoverPassword);
+router.post("/verify-token", verifyToken);
 
 module.exports = router;
