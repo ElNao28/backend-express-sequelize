@@ -26,13 +26,13 @@ const AnimeStudio = sequelize.define(
   }
 );
 
-Animes.belongsToMany(AnimeStudio, {
-  through: Studio,
+Animes.belongsToMany(Studio, {
+  through: AnimeStudio,
   foreignKey: "idAnime",
   as: "Studios",
 });
-Studio.belongsToMany(AnimeStudio, {
-  through: Animes,
+Studio.belongsToMany(Animes, {
+  through: AnimeStudio,
   foreignKey: "idStudio",
   as: "Animes",
 });

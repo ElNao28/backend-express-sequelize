@@ -27,7 +27,7 @@ const getAllGenders = async (req, res) => {
 const updateGenderById = async (req, res) => {
   try {
     const { id } = req.query;
-    const updGender = await Gender.update(req.body, {
+    await Gender.update(req.body, {
       where: {
         id,
       },
@@ -40,7 +40,7 @@ const updateGenderById = async (req, res) => {
 const deleteGenderById = async (req, res) => {
   try {
     const { id } = req.query;
-    const delGender = await Gender.update(
+    await Gender.update(
       { delete: true },
       {
         where: {

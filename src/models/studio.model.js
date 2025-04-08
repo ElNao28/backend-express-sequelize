@@ -16,6 +16,7 @@ const Studio = sequelize.define(
   },
   {
     timestamps: false,
+    tableName:'tbl_studio'
   }
 );
 

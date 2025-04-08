@@ -7,6 +7,7 @@ const rutasAuth = require("./routes/auth.route");
 const rutasAnime = require("./routes/animes.route");
 const rutasEpisodes = require("./routes/episodes.route");
 const rutasGenders = require("./routes/genders.route");
+const rutasStudio = require("./routes/studio.route");
 
 app.use(
   cors({
@@ -20,5 +21,6 @@ app.use("/", rutasAuth);
 app.use("/", rutasAnime);
 app.use("/", rutasEpisodes);
 app.use("/", rutasGenders);
+app.use("/", rutasStudio);
 
 module.exports = app;
