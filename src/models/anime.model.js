@@ -13,9 +13,6 @@ const Anime = sequelize.define(
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     type: DataTypes.STRING,
-    //gender -> debe relacionarse con su respectiva tabla
-    //studio -> debe relacionarse con su tabla
-    //episodes -> debe relacionarse con su tabla
     language: DataTypes.STRING,
     durationEpisodes: {
       type: DataTypes.STRING,
