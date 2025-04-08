@@ -1,8 +1,23 @@
 const Anime = require("../models/anime.model");
-
+const AnimeGender = require("../models/anime-gender.model");
+const AnimeStudio = require("../models/anime-studio.model");
 const createNewAnime = async (req, res) => {
   try {
-    const newAnime = await Anime.create(req.body);
+    const { genders, studios, ...anime } = req.body;
+    const newAnime = await Anime.create(anime);
+
+    for (const idGender of genders) {
+      await AnimeGender.create({
+        idAnime: newAnime.id,
+        idGender,
+      });
+    }
+    for (const idStudio of studios) {
+      await AnimeStudio.create({
+        idAnime: newAnime.id,
+        idStudio,
+      });
+    }
 
     return res.status(200).json({
       message: "Se creo exitosamente el anime",
@@ -22,7 +37,7 @@ const getAllAnimes = async (req, res) => {
       where: {
         delete: false,
       },
-      include: ["Genders"],
+      include: ["Genders","Studios"],
     });
     return res.status(200).json({
       message: "Se encontro data",
