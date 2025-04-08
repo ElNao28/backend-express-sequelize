@@ -35,7 +35,11 @@ const Animes = sequelize.define(
 
 Animes.hasMany(Episodes, {
   foreignKey: "animeId",
+  as: 'episodes'
 });
-Episodes.belongsTo(Animes);
+Episodes.belongsTo(Animes,{
+  foreignKey: "animeId",
+  as:'anime'
+});
 
 module.exports = Animes;

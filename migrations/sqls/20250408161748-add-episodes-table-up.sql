@@ -6,7 +6,8 @@ CREATE TABLE
         id SERIAL PRIMARY KEY,
         name varchar(255) NOT NULL,
         number INTEGER NOT NULL,
-        anime_id INTEGER NOT NULL
+        anime_id INTEGER NOT NULL,
+        delete boolean DEFAULT false
     );
 
 ALTER TABLE tbl_episodes ADD CONSTRAINT fk_anime FOREIGN KEY (anime_id) REFERENCES tbl_animes (id);

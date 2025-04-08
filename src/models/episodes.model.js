@@ -13,6 +13,14 @@ const Episodes = sequelize.define("tbl_episodes", {
     type: DataTypes.INTEGER,
     field: "anime_id",
   },
-});
+  delete: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+},
+{
+  timestamps:false
+}
+);
 
 module.exports = Episodes;
