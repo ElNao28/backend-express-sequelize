@@ -8,7 +8,7 @@ CREATE TABLE
         description TEXT NOT NULL,
         type varchar(255) NOT NULL,
         language varchar(255) NOT NULL,
-        duration_episodes INTEGER NOT NULL,
+        duration_episodes varchar(255) NOT NULL,
         emitted timestamp NOT NULL,
         state varchar(255) NOT NULL,
         delete boolean DEFAULT false
