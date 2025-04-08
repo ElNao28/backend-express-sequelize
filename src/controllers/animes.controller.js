@@ -22,6 +22,7 @@ const getAllAnimes = async (req, res) => {
       where: {
         delete: false,
       },
+      include: ["Genders"],
     });
     return res.status(200).json({
       message: "Se encontro data",
@@ -39,11 +40,11 @@ const getAnimeById = async (req, res) => {
   try {
     const { id } = req.query;
     const foundAnime = await Anime.findOne({
-      where:{
+      where: {
         id,
-        delete:false
+        delete: false,
       },
-      include: ["episodes"],
+      include: ["episodes", "Genders"],
     });
     if (!foundAnime)
       return res.status(404).json({
@@ -66,7 +67,7 @@ const updateAnimeById = async (req, res) => {
     const updateAnime = await Anime.update(req.body, {
       where: {
         id,
-        delete:false
+        delete: false,
       },
     });
     return res.status(200).json({

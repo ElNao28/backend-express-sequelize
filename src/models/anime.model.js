@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../database/database");
 const Episodes = require("./episodes.model");
 
-const Animes = sequelize.define(
+const Anime = sequelize.define(
   "tbl_animes",
   {
     id: {
@@ -26,20 +26,20 @@ const Animes = sequelize.define(
     delete: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    },
+    }, 
   },
   {
     timestamps: false,
   }
 );
 
-Animes.hasMany(Episodes, {
+Anime.hasMany(Episodes, {
   foreignKey: "animeId",
   as: 'episodes'
 });
-Episodes.belongsTo(Animes,{
+Episodes.belongsTo(Anime,{
   foreignKey: "animeId",
   as:'anime'
 });
 
-module.exports = Animes;
+module.exports = Anime;
