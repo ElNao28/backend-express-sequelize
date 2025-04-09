@@ -8,6 +8,7 @@ const rutasAnime = require("./routes/animes.route");
 const rutasEpisodes = require("./routes/episodes.route");
 const rutasGenders = require("./routes/genders.route");
 const rutasStudio = require("./routes/studio.route");
+const rutasUploadMasiveData = require("./routes/upload-masive-data.route");
 
 app.use(
   cors({
@@ -22,5 +23,6 @@ app.use("/", rutasAnime);
 app.use("/", rutasEpisodes);
 app.use("/", rutasGenders);
 app.use("/", rutasStudio);
+app.use("/", rutasUploadMasiveData);
 
 module.exports = app;
