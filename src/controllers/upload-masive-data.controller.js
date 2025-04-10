@@ -3,10 +3,10 @@ const HandlerError = require("../helpers/handlerError.helper");
 const ApiResponse = require("../helpers/reponse-api.helper");
 const Gender = require("../models/gender.model");
 const Studio = require("../models/studio.model");
-const Animes = require("../models/anime.model");
 const AnimeGender = require("../models/anime-gender.model");
 const AnimeStudio = require("../models/anime-studio.model");
 const Anime = require("../models/anime.model");
+const ImagesAnime = require("../models/images-anime.model");
 
 const uploadGenders = async (req, res) => {
   try {
@@ -68,6 +68,23 @@ const uploadAnimeMasive = async (req, res) => {
         durationEpisodes: anime.duration,
         emitted: anime.aired.from,
         state: "Finished",
+      });
+
+      await ImagesAnime.create({
+        url:
+          anime.images.webp.large_image_url != null
+            ? anime.images.webp.large_image_url
+            : "null",
+        type: "front",
+        idAnime: newAnime.id,
+      });
+      await ImagesAnime.create({
+        url:
+          anime.trailer.images.maximum_image_url != null
+            ? anime.trailer.images.maximum_image_url
+            : "null",
+        type: "background",
+        idAnime: newAnime.id,
       });
 
       for (const gender of anime.genres) {
