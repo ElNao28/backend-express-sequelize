@@ -37,7 +37,7 @@ const getAllAnimes = async (req, res) => {
       where: {
         delete: false,
       },
-      include: ["Genders","Studios"],
+      include: ["Genders","Studios","Images"],
     });
     return res.status(200).json({
       message: "Se encontro data",
